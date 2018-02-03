@@ -31,7 +31,7 @@ public class Spinner : MonoBehaviour {
         spinner.connected.Add(this);
 
         spinner.speed = this.speed;
-        spinner.axis *= -this.axis; // TODO fix for non-plane gears
+        spinner.axis = -1 * this.axis; // TODO fix for non-plane gears
     }
 
     public void Highlight(bool show) {
