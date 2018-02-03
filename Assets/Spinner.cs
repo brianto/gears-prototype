@@ -23,11 +23,15 @@ public class Spinner : MonoBehaviour {
     }
 
     public void Connect(Spinner spinner) {
+        if (spinner == this || this.connected.Contains(spinner)) {
+            return;
+        }
+
         this.connected.Add(spinner);
-        spinner.connected.Add(spinner);
+        spinner.connected.Add(this);
 
         spinner.speed = this.speed;
-        spinner.axis *= -1; // TODO fix for non-plane gears
+        spinner.axis *= -this.axis; // TODO fix for non-plane gears
     }
 
     public void Highlight(bool show) {

@@ -24,6 +24,7 @@ public class MouseController : MonoBehaviour {
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 250)) {
+            Debug.Log(hit.transform.gameObject.name);
             Spinner spinner = hit.transform.gameObject.GetComponent<Spinner>();
 
             if (spinner != null) {
