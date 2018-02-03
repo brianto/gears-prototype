@@ -15,6 +15,7 @@ public class Spinner : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        this.connected = new HashSet<Spinner>();
     }
 	
     void Update() {
@@ -22,7 +23,14 @@ public class Spinner : MonoBehaviour {
     }
 
     public void Connect(Spinner spinner) {
-        this.speed = spinner.speed;
-        this.axis *= -1;
+        this.connected.Add(spinner);
+        spinner.connected.Add(spinner);
+
+        spinner.speed = this.speed;
+        spinner.axis *= -1; // TODO fix for non-plane gears
+    }
+
+    public void Highlight(bool show) {
+        // TODO
     }
 }
