@@ -16,7 +16,7 @@ public class Stabber : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		myX.current += spinner.speed * direction * Time.deltaTime;
+		myX.current += spinner.speed/3 * direction * Time.deltaTime;
 
 		if (myX.isAtMax() || myX.isAtMin()) {
 			direction *= -1;
