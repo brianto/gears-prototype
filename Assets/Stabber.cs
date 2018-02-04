@@ -9,18 +9,17 @@ public class Stabber : MonoBehaviour {
 	public int direction = 1;
 	public float startX;
 
-	// Use this for initialization
-	void Start () {
-		startX = transform.position.x;
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
+		startX = spinner.transform.position.x;
 		myX.current += spinner.speed/3 * direction * Time.deltaTime;
 
 		if (myX.isAtMax() || myX.isAtMin()) {
 			direction *= -1;
 		}
-		transform.position = new Vector3(startX + myX.current, transform.position.y, transform.position.z);
+
+		transform.position = new Vector3(startX + myX.current, transform.position.y, spinner.transform.position.z);
 	}
 }

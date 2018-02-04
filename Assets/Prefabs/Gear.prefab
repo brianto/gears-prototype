@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4067816518642300}
   - component: {fileID: 114587871902072336}
   - component: {fileID: 135190762353988738}
+  - component: {fileID: 114645627950509074}
+  - component: {fileID: 114300875010424046}
   m_Layer: 0
   m_Name: Gear
   m_TagString: Untagged
@@ -80,8 +82,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408192966149774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 0.5, z: 5}
+  m_LocalPosition: {x: -6.42, y: 0, z: -3.71}
+  m_LocalScale: {x: 10, y: 0.5, z: 10}
   m_Children:
   - {fileID: 4784677174171306}
   m_Father: {fileID: 0}
@@ -110,6 +112,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -125,6 +128,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -140,6 +144,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950121750159952}
   m_Mesh: {fileID: 4300000, guid: e80f1af2d894d4d8e898424970e306cf, type: 3}
+--- !u!114 &114300875010424046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408192966149774}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e47431fde314a7a82165e75d607433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114587871902072336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,9 +166,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d749c82a4653043a8935e3b9290499f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 1
+  size: 2
   speed: 0
   axis: {x: 0, y: 1, z: 0}
+--- !u!114 &114645627950509074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408192966149774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a71e9f7048774a9aa24f441ac3bcb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourPerStates:
+  - {fileID: 114300875010424046}
+  - {fileID: 114587871902072336}
+  defaultState: 1
 --- !u!135 &135190762353988738
 SphereCollider:
   m_ObjectHideFlags: 1
