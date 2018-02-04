@@ -7,7 +7,8 @@ public class Spinner : MonoBehaviour {
 
     // TODO gear ratio
 
-    private HashSet<Spinner> connected;
+    private Spinner driver;
+    private HashSet<Spinner> drivees;
 
     public float speed;
 
@@ -15,23 +16,41 @@ public class Spinner : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        this.connected = new HashSet<Spinner>();
+        this.drivees = new HashSet<Spinner>();
     }
-	
+
     void Update() {
+        foreach (Spinner spinner in this.drivees) {
+            spinner.speed = this.speed;
+        }
+
         this.transform.RotateAround(this.transform.position, this.axis, this.speed * Time.deltaTime);
     }
 
-    public void Connect(Spinner spinner) {
-        if (spinner == this || this.connected.Contains(spinner)) {
+    public void Drive(Spinner spinner) {
+        if (spinner == this || this.drivees.Contains(spinner)) {
             return;
         }
 
-        this.connected.Add(spinner);
-        spinner.connected.Add(this);
+        this.drivees.Add(spinner);
+        spinner.driver = this;
 
-        spinner.speed = this.speed;
         spinner.axis = -1 * this.axis; // TODO fix for non-plane gears
+    }
+
+    public void Disconnect() {
+        if (this.driver != null) {
+            this.driver.drivees.Remove(this);
+            this.speed = 0;
+            this.driver = null;
+        }
+
+        List<Spinner> originalDrivees = this.drivees.ToList();
+        foreach (Spinner spinner in originalDrivees) {
+            spinner.Disconnect();
+        }
+
+        this.drivees.Clear();
     }
 
     public void Highlight(bool show) {

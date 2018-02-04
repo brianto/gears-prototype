@@ -17,6 +17,15 @@ public class MouseController : MonoBehaviour {
                 this.OnSelectSpinner(clicked);
             }
         }
+
+        if (Input.GetMouseButtonDown(1)) {
+            this.source = null;
+            Spinner clicked = this.GetClickedSpinner();
+
+            if (clicked != null) {
+                this.OnDisconnectSpinner(clicked);
+            }
+        }
     }
 
     Spinner GetClickedSpinner() {
@@ -35,6 +44,10 @@ public class MouseController : MonoBehaviour {
         return null;
     }
 
+    void OnDisconnectSpinner(Spinner spinner) {
+        spinner.Disconnect();
+    }
+
     void OnSelectSpinner(Spinner spinner) {
         if (this.source == null) {
             this.source = spinner;
@@ -42,9 +55,23 @@ public class MouseController : MonoBehaviour {
             return;
         }
 
-        this.source.Connect(spinner);
+        Spinner driver = FindDriver(this.source, spinner);
+
+        driver.Drive(driver == this.source ? spinner : this.source);
 
         this.source.Highlight(false);
         this.source = null;
+    }
+
+    static Spinner FindDriver(Spinner a, Spinner b) {
+        if (a.speed > 0) {
+            return a;
+        }
+
+        if (b.speed > 0) {
+            return b;
+        }
+
+        return a;
     }
 }
