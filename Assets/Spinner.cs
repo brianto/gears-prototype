@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Spinner : MonoBehaviour {
 
-    // TODO gear ratio
-
     private Spinner driver;
     private HashSet<Spinner> drivees;
 
+    public float size;
     public float speed;
-
     public Vector3 axis;
 
     // Use this for initialization
@@ -21,7 +19,7 @@ public class Spinner : MonoBehaviour {
 
     void Update() {
         foreach (Spinner spinner in this.drivees) {
-            spinner.speed = this.speed;
+            spinner.speed = this.speed * this.size / spinner.size;
         }
 
         this.transform.RotateAround(this.transform.position, this.axis, this.speed * Time.deltaTime);
